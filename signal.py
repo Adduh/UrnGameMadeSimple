@@ -6,8 +6,6 @@ class Signal:
         self.signal_combinations = signal_combinations
         self.amount_info = amount_info
 
-        # print("Signal: {:s}".format(self.notation()))
-
     def __add__(self, other):
         amount_info = self.amount_info + other.amount_info
         signal_combinations = [0, 0, 0]
@@ -16,10 +14,10 @@ class Signal:
         return Signal(signal_combinations, amount_info)
 
     def notation(self):
-        return "({:d}{:d}{:d})^{:d}".format(self.signal_combinations[0],
-                                            self.signal_combinations[1],
-                                            self.signal_combinations[2],
-                                            self.amount_info)
+        return "({}{}{})^{}".format(self.signal_combinations[0],
+                                    self.signal_combinations[1],
+                                    self.signal_combinations[2],
+                                    self.amount_info)
 
 
 class SingleSignal(Signal):
@@ -27,6 +25,6 @@ class SingleSignal(Signal):
         super().__init__(signal_combinations, 1)
 
     def notation(self):
-        return "({:d}{:d}{:d})".format(self.signal_combinations[0],
-                                       self.signal_combinations[1],
-                                       self.signal_combinations[2])
+        return "({}{}{})".format(self.signal_combinations[0],
+                                 self.signal_combinations[1],
+                                 self.signal_combinations[2])
