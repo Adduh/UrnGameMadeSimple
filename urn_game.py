@@ -45,7 +45,7 @@ class UrnGame:
         sum = 0
         for ω in range(0, 6):
             sum += self._posterior(ω, γ) * self._p_γ_given_ω(s, ω)
-        # print("p({}|{}) = {}".format(s.notation(), γ.notation(), sum))
+        # print("p({}|{}) = {:2.2f}%".format(s.notation(), γ.notation(), sum*100))
         return sum
 
     def _posterior(self, ω: int, γ: Signal):

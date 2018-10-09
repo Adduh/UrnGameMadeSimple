@@ -34,7 +34,7 @@ def append_per_signal(row: dict, signal_count: int, f: float, g: float, success_
 
 
 for n, input in enumerate(data, 1):
-    print('Game {} (game_id: {} {}):'.format(n, input['game_id'], [input['a'], input['b'], input['c']]))
+    # print('Game {} (game_id: {} {}):'.format(n, input['game_id'], [input['a'], input['b'], input['c']]))
     output = {'game_id': int(input['game_id'])}
     signal = Signal()
 
@@ -54,17 +54,16 @@ for n, input in enumerate(data, 1):
         else:
             optimal_exit_roll_count_found = True
     option = int(input['option']) - 1
-    print(option)
-    for s in range(1, 9):
-        label = 'signal{}'.format(s)
-        if math.isnan((input[label])):
+    for signal_position in range(1, 9):
+        label = 'signal{}'.format(signal_position)
+        if math.isnan(input[label]):
             continue
         current_roll += 1
 
-        signal += Signal.from_number(s)
+        signal += Signal.from_number(int(input[label]))
         g, gross_profits = urn.G(signal)
         f = urn.F(signal)
-        append_per_signal(output, s, f, g, input['succinv'], input['directcostaddinfo'])
+        append_per_signal(output, signal_position, f, g, input['succinv'], input['directcostaddinfo'])
         if not optimal_exit_roll_count_found:
             if f - g - input['directcostaddinfo'] > 0:
                 optimal_exit_roll_count = current_roll + 1
