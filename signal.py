@@ -2,7 +2,7 @@ from typing import List
 
 
 class Signal:
-    def __init__(self, signal_combinations: List[int], amount_info: int):
+    def __init__(self, signal_combinations: List[int] = [0, 0, 0], amount_info: int = 0):
         self.signal_combinations = signal_combinations
         self.amount_info = amount_info
 
@@ -12,6 +12,25 @@ class Signal:
         for i in 0, 1, 2:
             signal_combinations[i] += self.signal_combinations[i] + other.signal_combinations[i]
         return Signal(signal_combinations, amount_info)
+
+    @staticmethod
+    def from_number(number: int):
+        if number == 1:
+            return SingleSignal([1, 1, 1])
+        if number == 2:
+            return SingleSignal([1, 1, 0])
+        if number == 3:
+            return SingleSignal([1, 0, 0])
+        if number == 4:
+            return SingleSignal([0, 0, 0])
+        if number == 5:
+            return SingleSignal([0, 0, 1])
+        if number == 6:
+            return SingleSignal([0, 1, 1])
+        if number == 7:
+            return SingleSignal([1, 0, 1])
+        if number == 8:
+            return SingleSignal([0, 1, 0])
 
     def notation(self):
         return "({}{}{})^{}".format(self.signal_combinations[0],
